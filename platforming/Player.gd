@@ -8,7 +8,10 @@ const JUMP = -600
 var numjumps = 2
 var velocity = Vector2.ZERO
 var justjumped = false
+var numcoins = 0
 onready var anim = $AnimatedSprite
+
+signal coin_collected
 
 func _ready():
 	pass
@@ -40,4 +43,8 @@ func _process(delta):
 func _physics_process(delta):
 	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	print(velocity)
+
+
+func _on_Coin_collected():
+	numcoins+=1
+	emit_signal("coin_collected")
